@@ -1,4 +1,5 @@
-
+document.getElementById('btn').addEventListener('click', function() {
+    window.location.href = 'menu.html';
 // Inicializa Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBmb59pzNCTbywf8x_dm01EXhw0azIf7Yw",
@@ -50,6 +51,3 @@ function mostrarToast(mensaje) {
         document.body.removeChild(toast);
     }, 3000); // Elimina el toast después de 3 segundos
 }
-
-// Asumiendo que tienes un botón para iniciar sesión
-document.getElementById("btn").onclick = verificarUsuario;
