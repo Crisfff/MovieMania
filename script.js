@@ -1,14 +1,16 @@
 document.getElementById('btn').addEventListener('click', function() {
     window.location.href = 'menu.html';
+});
+
 // Inicializa Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBmb59pzNCTbywf8x_dm01EXhw0azIf7Yw",
-    authDomain: "moviemaniaprime.firebaseapp.com",
-    databaseURL: "https://moviemaniaprime-default-rtdb.firebaseio.com",
-    projectId: "moviemaniaprime",
+   
+    
+    projectId: "moviemaniaprime-default-rtdb.firebaseio.com",
     storageBucket: "moviemaniaprime.appspot.com",
-    messagingSenderId: "550055949557",
-    appId: "1:550055949557:android:168594589de1bc723f41bc"
+  
+    appId: "1:550055949557:web:168594589de1bc723f41bc"
 };
 
 // Inicializa tu app Firebase
@@ -22,19 +24,15 @@ function verificarUsuario() {
     const userRef = firebase.database().ref('User/' + email);
 
     userRef.once('value').then(snapshot => {
-        if (!snapshot.exists()) {
-            // Si el usuario no existe
-            mostrarToast("User no encontrado");
-        } else {
-            // Verifica la contraseña
-            const seguridad = snapshot.child('Segurit').val();
-            if (seguridad !== password) {
-                // Contraseña incorrecta
-                mostrarToast("Contraseña Incorrecta");
-            } else {
-                // Credenciales correctas, redirigir
+        if (snapshot.exists()) {
+            const seguridad = snapshot.child('Seguridad').val();
+            if (seguridad === password) {
                 window.location.href = 'menu.html';
+            } else {
+                mostrarToast("Contraseña incorrecta");
             }
+        } else {
+            mostrarToast("Usuario no encontrado");
         }
     }).catch(error => {
         console.error("Error al leer la base de datos:", error);
